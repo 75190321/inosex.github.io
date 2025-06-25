@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Divisi Perencanaan Teknik</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4CAF50 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.1);
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 50%, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 100px 100px;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .logo-container {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 30px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.3);
+      animation: pulse 2s infinite;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    
+    .logo-image {
+      width: 100px;
+      height: 100px;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDIwMCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImxlYWYiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojQzlGNDMxO3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6IzgzRjUxQjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNDREOTNCO3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9IndhdGVyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzU5RDVGRjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMzQkI2RkY7c3RvcC1vcGFjaXR5OjEiIC8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzFBNzNFODtzdG9wLW9wYWNpdHk6MSIgLz4KPC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJkcm9wIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzU5RDVGRjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMUE3M0U4O3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxwYXRoIGQ9Ik0yMCA1MEM0MCAyMCA4MCAyMCAxMDAgNTBDMTIwIDgwIDEyMCAxMjAgMTAwIDE1MEM4MCAxODAgNDAgMTgwIDIwIDE1MEM2IDEyMCA2IDgwIDIwIDUwWiIgZmlsbD0idXJsKCNsZWFmKSIvPgo8cGF0aCBkPSJNMTgwIDIwMEMxODAgMTcwIDE2NSAxNDAgMTM1IDEyMEM5NSAxMDAgNjUgMTIwIDUwIDE2MEM0NSAxODAgNTUgMjAwIDc1IDIxMEM5NSAyMjAgMTIwIDIyMCAxNDAgMjEwQzE2MCAyMDAgMTgwIDIwMCAxODAgMjAwWiIgZmlsbD0idXJsKCN3YXRlcikiLz4KPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEzMCIgcng9IjEyIiByeT0iMjAiIGZpbGw9InVybCgjZHJvcCkiLz4KPC9zdmc+');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: slideInDown 1s ease-out 0.3s both;
+    }
+    
+    .hero p {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: slideInUp 1s ease-out 0.6s both;
+    }
+    
+    .divisions {
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      padding: 80px 20px;
+      text-align: center;
+    }
+    
+    .divisions h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 20px;
+      color: #1e3c72;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .divisions h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, #2a5298, #4CAF50);
+      border-radius: 2px;
+    }
+    
+    .division-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .division-card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .division-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(45deg, #2a5298, #4CAF50);
+    }
+    
+    .division-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .division-card .icon {
+      font-size: 50px;
+      margin-bottom: 20px;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    
+    .division-card:hover .icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .division-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #1e3c72;
+      font-weight: 600;
+    }
+    
+    .division-card p {
+      color: #666;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+    
+    .division-card a {
+      display: inline-block;
+      background: linear-gradient(45deg, #2a5298, #4CAF50);
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .division-card a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .division-card a:hover::before {
+      left: 100%;
+    }
+    
+    .division-card a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(42, 82, 152, 0.3);
+    }
+    
+    .footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 40px;
+      position: relative;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(45deg, transparent, #4CAF50, transparent);
+    }
+    
+    .footer h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #4CAF50;
+    }
+    
+    .footer-bottom {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px;
+      }
+      
+      .divisions {
+        padding: 60px 20px;
+      }
+      
+      .division-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 40px;
+      }
+      
+      .division-card {
+        padding: 30px 20px;
+      }
+      
+      .footer {
+        padding: 40px 20px 30px;
+      }
+    }
+    
+    /* Loading Animation */
+    .division-card {
+      animation: fadeInUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .division-card:nth-child(1) { animation-delay: 0.1s; }
+    .division-card:nth-child(2) { animation-delay: 0.2s; }
+    .division-card:nth-child(3) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="logo-container">
+        <div class="logo-image"></div>
+      </div>
+      <h1>DIVISI PERENCANAAN TEKNIK</h1>
+      <p>Mengelola perencanaan infrastruktur, unit sambungan baru dan pengawasan dengan sistem terintegrasi untuk pelayanan optimal</p>
+    </div>
+  </section>
+  
+  <section class="divisions">
+    <h2>Sub Divisi Kami</h2>
+    <div class="division-grid">
+      <div class="division-card">
+        <div class="icon">🏗️</div>
+        <h3>Perencanaan Infrastruktur</h3>
+        <p>Mengelola dan merencanakan pembangunan infrastruktur air bersih untuk wilayah Jember</p>
+        <a href="https://drive.google.com/drive/folders/1xKVi0tQp2T_f6tJR9oqrVSKySHLWlOmh" target="_blank">Lihat Dokumen</a>
+      </div>
+      
+      <div class="division-card">
+        <div class="icon">🔌</div>
+        <h3>Unit Sambungan Baru</h3>
+        <p>Mengurus proses pemasangan sambungan baru air bersih untuk pelanggan</p>
+        <a href="https://drive.google.com/drive/folders/1yym9wtLDD_SP8ASBrAa4GE5sgBwTn6MH" target="_blank">Lihat Dokumen</a>
+      </div>
+      
+      <div class="division-card">
+        <div class="icon">👁️</div>
+        <h3>Pengawasan</h3>
+        <p>Melakukan monitoring dan pengawasan terhadap kualitas pelayanan air bersih</p>
+        <a href="https://drive.google.com/drive/folders/1DFop1iqRf_Myh0hgPYAQu8M3-9yN3Kno" target="_blank">Lihat Dokumen</a>
+      </div>
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <h3>PERUMDAM TIRTA PANDALUNGAN JEMBER</h3>
+    <p>Melayani dengan Sepenuh Hati untuk Air Bersih Berkualitas</p>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Divisi Perencanaan Teknik. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
